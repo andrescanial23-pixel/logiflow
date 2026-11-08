@@ -334,6 +334,7 @@
 
         .tag-green { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
         .tag-blue { background: rgba(37, 99, 235, 0.15); color: var(--accent-blue); }
+        .tag-yellow { background: rgba(245, 158, 11, 0.15); color: #F59E0B; }
 
         .section {
             padding: 6rem 0;
@@ -549,61 +550,24 @@
                 </div>
                 <div class="mockup-body">
                     <div class="sidebar-menu">
-                        <div class="menu-item"><i class="fa-solid fa-chart-pie"></i> Executive Overview</div>
+                        <div class="menu-item" onclick="switchDashboardTab('executive', this)"><i class="fa-solid fa-chart-pie"></i> Executive Overview</div>
                         <!-- WMS Direct Redirection Link -->
-                        <a href="https://havi-wms-ims.ai.studio/" target="_blank" class="menu-item active"><i class="fa-solid fa-boxes-stacked"></i> Warehouse WMS</a>
-                        <div class="menu-item"><i class="fa-solid fa-cash-register"></i> Terminal POS</div>
-                        <div class="menu-item"><i class="fa-solid fa-clipboard-check"></i> QMS Audit</div>
-                        <div class="menu-item"><i class="fa-solid fa-file-invoice"></i> Reports & ERP</div>
+                        <a href="https://havi-wms-ims.ai.studio/" target="_blank" class="menu-item active" id="wmsTab" onclick="switchDashboardTab('wms', this)"><i class="fa-solid fa-boxes-stacked"></i> Warehouse WMS</a>
+                        <div class="menu-item" onclick="switchDashboardTab('pos', this)"><i class="fa-solid fa-cash-register"></i> Terminal POS</div>
+                        <div class="menu-item" onclick="switchDashboardTab('qms', this)"><i class="fa-solid fa-clipboard-check"></i> QMS Audit</div>
+                        <div class="menu-item" onclick="switchDashboardTab('erp', this)"><i class="fa-solid fa-file-invoice"></i> Reports & ERP</div>
                     </div>
                     <div class="dashboard-content">
-                        <div class="metrics-grid">
-                            <div class="metric-card">
-                                <span>Active Warehouse SKU Stock</span>
-                                <div>142,850 Units</div>
-                            </div>
-                            <div class="metric-card">
-                                <span>Today's Outbound Orders</span>
-                                <div style="color: var(--accent-cyan);">1,240 Lines</div>
-                            </div>
-                            <div class="metric-card">
-                                <span>Cycle Count Accuracy</span>
-                                <div style="color: var(--accent-green);">99.85%</div>
-                            </div>
+                        <div class="metrics-grid" id="metricsGrid">
+                            <!-- Dynamic Metrics Inserted via JS -->
                         </div>
                         <div class="data-table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Location / Bin</th>
-                                        <th>SKU Description</th>
-                                        <th>Lot / Expiry</th>
-                                        <th>Qty On Hand</th>
-                                        <th>Sync Status</th>
-                                    </tr>
+                            <table id="dashTable">
+                                <thead id="tableHead">
+                                    <!-- Dynamic Table Headers Inserted via JS -->
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>BIN-A102-04</td>
-                                        <td>Industrial Motor Driver V2</td>
-                                        <td>LOT-2026-0911 (FEFO)</td>
-                                        <td>1,200</td>
-                                        <td><span class="tag-status tag-green">Synced</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>BIN-B045-12</td>
-                                        <td>Sensors Assembly Component</td>
-                                        <td>LOT-2026-1002 (FIFO)</td>
-                                        <td>4,550</td>
-                                        <td><span class="tag-status tag-green">Synced</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>BIN-C101-01</td>
-                                        <td>Controller Unit Microchip</td>
-                                        <td>LOT-2026-1040 (FEFO)</td>
-                                        <td>850</td>
-                                        <td><span class="tag-status tag-blue">Staging</span></td>
-                                    </tr>
+                                <tbody id="tableBody">
+                                    <!-- Dynamic Table Rows Inserted via JS -->
                                 </tbody>
                             </table>
                         </div>
@@ -736,9 +700,125 @@
         </div>
     </footer>
 
-    <!-- JavaScript Integration Script -->
+    <!-- Interactive Dashboard Data & Apps Script Integration -->
     <script>
-        // Google Apps Script Web App Endpoint URL (Targeting 'record' tab on Google Sheet)
+        // Sample Data Repository per Module
+        const dashboardData = {
+            wms: {
+                metrics: [
+                    { label: "Active Warehouse SKU Stock", val: "142,850 Units", color: "var(--text-main)" },
+                    { label: "Today's Outbound Orders", val: "1,240 Lines", color: "var(--accent-cyan)" },
+                    { label: "Cycle Count Accuracy", val: "99.85%", color: "var(--accent-green)" }
+                ],
+                headers: ["Location / Bin", "SKU Description", "Lot / Expiry", "Qty On Hand", "Sync Status"],
+                rows: [
+                    ["BIN-A102-04", "Industrial Motor Driver V2", "LOT-2026-0911 (FEFO)", "1,200", '<span class="tag-status tag-green">Synced</span>'],
+                    ["BIN-B045-12", "Sensors Assembly Component", "LOT-2026-1002 (FIFO)", "4,550", '<span class="tag-status tag-green">Synced</span>'],
+                    ["BIN-C101-01", "Controller Unit Microchip", "LOT-2026-1040 (FEFO)", "850", '<span class="tag-status tag-blue">Staging</span>']
+                ]
+            },
+            executive: {
+                metrics: [
+                    { label: "Monthly Gross Revenue", val: "₱4,850,200", color: "var(--accent-green)" },
+                    { label: "Total Active Fulfillment Hubs", val: "12 Locations", color: "var(--accent-cyan)" },
+                    { label: "Overall Operating Efficiency", val: "98.4%", color: "var(--text-main)" }
+                ],
+                headers: ["Regional Hub", "Active Manager", "Daily Orders Passed", "Net SLA %", "Health Check"],
+                rows: [
+                    ["Laguna Hub (Main)", "Andres Canial Jr.", "14,250 Dispatch", "99.8%", '<span class="tag-status tag-green">Optimal</span>'],
+                    ["Cebu Logistics Hub", "Maria Santos", "8,120 Dispatch", "97.5%", '<span class="tag-status tag-green">Optimal</span>'],
+                    ["Davao Cold Chain", "Juan Dela Cruz", "5,400 Dispatch", "95.2%", '<span class="tag-status tag-yellow">Warning</span>']
+                ]
+            },
+            pos: {
+                metrics: [
+                    { label: "Today's Total POS Sales", val: "₱342,950", color: "var(--accent-green)" },
+                    { label: "Active Checkout Terminals", val: "18 Online", color: "var(--accent-cyan)" },
+                    { label: "Avg Transaction Time", val: "14.2 Seconds", color: "var(--text-main)" }
+                ],
+                headers: ["Terminal ID", "Cashier Name", "Transactions Today", "Gross Total", "Terminal Status"],
+                rows: [
+                    ["POS-TERM-01", "R. Reyes", "142 Sales", "₱45,800", '<span class="tag-status tag-green">Active</span>'],
+                    ["POS-TERM-02", "A. Mendoza", "189 Sales", "₱62,150", '<span class="tag-status tag-green">Active</span>'],
+                    ["POS-TERM-03", "E. Castro", "98 Sales", "₱31,400", '<span class="tag-status tag-blue">Settling</span>']
+                ]
+            },
+            qms: {
+                metrics: [
+                    { label: "Inbound Goods Inspected", val: "1,450 Pallets", color: "var(--text-main)" },
+                    { label: "Quarantine / Holding Stock", val: "12 Items", color: "var(--accent-yellow)" },
+                    { label: "Inbound Quality Pass Rate", val: "99.2%", color: "var(--accent-green)" }
+                ],
+                headers: ["Audit ID", "Inbound PO Ref", "Inspector", "Discrepancy Found", "Quarantine Action"],
+                rows: [
+                    ["AUD-2026-081", "PO-994812", "L. Gonzaga", "0 Defective Units", '<span class="tag-status tag-green">Passed QC</span>'],
+                    ["AUD-2026-082", "PO-994815", "M. Ramos", "2 Torn Packaging", '<span class="tag-status tag-yellow">Quarantined</span>'],
+                    ["AUD-2026-083", "PO-994820", "R. Aquilar", "0 Defective Units", '<span class="tag-status tag-green">Passed QC</span>']
+                ]
+            },
+            erp: {
+                metrics: [
+                    { label: "Open Purchase Orders", val: "48 Pending", color: "var(--accent-cyan)" },
+                    { label: "Supplier On-Time Rate", val: "96.8%", color: "var(--accent-green)" },
+                    { label: "Inventory Valuation", val: "₱88,400,000", color: "var(--text-main)" }
+                ],
+                headers: ["PO Reference", "Supplier Partner", "Est. Arrival Date", "Total Value", "Approval State"],
+                rows: [
+                    ["PO-2026-1049", "Global Electronics Supply", "Nov 12, 2026", "₱1,250,000", '<span class="tag-status tag-green">Approved</span>'],
+                    ["PO-2026-1050", "Pacific Packings Corp", "Nov 15, 2026", "₱480,000", '<span class="tag-status tag-blue">In Review</span>'],
+                    ["PO-2026-1051", "Laguna Motors Tech", "Nov 18, 2026", "₱2,100,000", '<span class="tag-status tag-yellow">Pending PO</span>']
+                ]
+            }
+        };
+
+        // Function to Switch Dashboard Tab Content Dynamically
+        function switchDashboardTab(tabKey, element) {
+            // Remove active class from all menu items
+            document.querySelectorAll('.sidebar-menu .menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked element
+            if (element) {
+                element.classList.remove('active');
+                element.classList.add('active');
+            }
+
+            const data = dashboardData[tabKey];
+            if (!data) return;
+
+            // Render Metrics Cards
+            const metricsContainer = document.getElementById('metricsGrid');
+            metricsContainer.innerHTML = data.metrics.map(m => `
+                <div class="metric-card">
+                    <span>${m.label}</span>
+                    <div style="color: ${m.color};">${m.val}</div>
+                </div>
+            `).join('');
+
+            // Render Table Header
+            const tableHead = document.getElementById('tableHead');
+            tableHead.innerHTML = `
+                <tr>
+                    ${data.headers.map(h => `<th>${h}</th>`).join('')}
+                </tr>
+            `;
+
+            // Render Table Body
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = data.rows.map(row => `
+                <tr>
+                    ${row.map(cell => `<td>${cell}</td>`).join('')}
+                </tr>
+            `).join('');
+        }
+
+        // Initialize default view (WMS Tab) on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            switchDashboardTab('wms', document.getElementById('wmsTab'));
+        });
+
+        // Google Apps Script Web App Endpoint URL
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz-MBLgFhbh2uqlbEyjVW6R2sTwTlFb1aZZ8QKESYCqV3q5AHZyv7-aLoVRSXXfLyv6/exec';
 
         const form = document.getElementById('leadForm');
