@@ -554,7 +554,7 @@
                         <!-- WMS Direct Redirection Link -->
                         <a href="https://havi-wms-ims.ai.studio/" target="_blank" class="menu-item" id="wmsTab" onclick="switchDashboardTab('wms', this)"><i class="fa-solid fa-boxes-stacked"></i> Warehouse WMS</a>
                         <!-- POS Direct Redirection Link -->
-                        <a href="https://apex-pos-terminal.ai.studio" target="_blank" class="menu-item active" id="posTab" onclick="switchDashboardTab('pos', this)"><i class="fa-solid fa-cash-register"></i> Terminal POS (Launch)</a>
+                        <a href="https://apex-pos-terminal.ai.studio/" target="_blank" class="menu-item active" id="posTab" onclick="switchDashboardTab('pos', this)"><i class="fa-solid fa-cash-register"></i> Terminal POS</a>
                         <div class="menu-item" onclick="switchDashboardTab('qms', this)"><i class="fa-solid fa-clipboard-check"></i> QMS Audit</div>
                         <div class="menu-item" onclick="switchDashboardTab('erp', this)"><i class="fa-solid fa-file-invoice"></i> Reports & ERP</div>
                     </div>
@@ -592,7 +592,7 @@
                     <p>Real-time multi-location bin tracking, automated picking staging, FEFO/FIFO compliance, and high-speed cycle count engine. (Click to Launch)</p>
                 </a>
                 <!-- POS Direct Redirection Link Card -->
-                <a href="https://apex-pos-terminal.ai.studio" target="_blank" class="module-card">
+                <a href="https://apex-pos-terminal.ai.studio/" target="_blank" class="module-card">
                     <div class="module-icon"><i class="fa-solid fa-cash-register"></i></div>
                     <h3>Point of Sale (POS) Terminal</h3>
                     <p>Instant barcode scanning integration, seamless multi-store inventory synchronization, and custom receipt printing. (Click to Launch)</p>
@@ -814,7 +814,7 @@
             switchDashboardTab('pos', document.getElementById('posTab'));
         });
 
-        // Google Apps Script Web App Endpoint URL
+        // Google Apps Script Web App Endpoint URL (Targeting 'record' tab on Google Sheet)
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz-MBLgFhbh2uqlbEyjVW6R2sTwTlFb1aZZ8QKESYCqV3q5AHZyv7-aLoVRSXXfLyv6/exec';
 
         const form = document.getElementById('leadForm');
