@@ -40,7 +40,6 @@
             overflow-x: hidden;
         }
 
-        /* Utility Components */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -100,7 +99,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Navigation */
         header {
             position: fixed;
             top: 0;
@@ -150,7 +148,6 @@
             color: var(--accent-cyan);
         }
 
-        /* Hero Section */
         .hero {
             padding: 9rem 0 5rem;
             text-align: center;
@@ -194,7 +191,6 @@
             margin-bottom: 4rem;
         }
 
-        /* Interactive App Interface Preview */
         .app-mockup {
             background-color: var(--bg-surface);
             border: 1px solid var(--border-color);
@@ -339,7 +335,6 @@
         .tag-green { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
         .tag-blue { background: rgba(37, 99, 235, 0.15); color: var(--accent-blue); }
 
-        /* Modules Grid */
         .section {
             padding: 6rem 0;
         }
@@ -408,7 +403,6 @@
             line-height: 1.5;
         }
 
-        /* Lead Form Modal/Section */
         .demo-section {
             background: linear-gradient(180deg, var(--bg-base) 0%, var(--bg-surface) 100%);
             border-top: 1px solid var(--border-color);
@@ -453,7 +447,49 @@
             border-color: var(--accent-cyan);
         }
 
-        /* Footer */
+        /* Contact Details Cards Style */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .contact-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-card i {
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            margin-top: 0.2rem;
+        }
+
+        .contact-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-card p, .contact-card a {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent-cyan);
+        }
+
         footer {
             padding: 3rem 0;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -462,7 +498,6 @@
             font-size: 0.85rem;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero-title { font-size: 2.25rem; }
             .hero-subtitle { font-size: 1rem; }
@@ -475,7 +510,6 @@
 </head>
 <body>
 
-    <!-- Navigation Header -->
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
@@ -483,14 +517,13 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#modules">Modules</a></li>
-                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="#demo">Request Demo</a></li>
             </ul>
             <a href="#demo" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.875rem;">Get Started</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="badge">
@@ -504,7 +537,6 @@
                 <a href="#modules" class="btn btn-secondary"><i class="fa-solid fa-play"></i> Explore Modules</a>
             </div>
 
-            <!-- Dashboard Mockup/App Showcase -->
             <div class="app-mockup">
                 <div class="mockup-header">
                     <div class="window-dots">
@@ -518,7 +550,7 @@
                 <div class="mockup-body">
                     <div class="sidebar-menu">
                         <div class="menu-item"><i class="fa-solid fa-chart-pie"></i> Executive Overview</div>
-                        <!-- Konekado sa iyong WMS link -->
+                        <!-- WMS Direct Redirection Link -->
                         <a href="https://havi-wms-ims.ai.studio/" target="_blank" class="menu-item active"><i class="fa-solid fa-boxes-stacked"></i> Warehouse WMS</a>
                         <div class="menu-item"><i class="fa-solid fa-cash-register"></i> Terminal POS</div>
                         <div class="menu-item"><i class="fa-solid fa-clipboard-check"></i> QMS Audit</div>
@@ -581,7 +613,6 @@
         </div>
     </section>
 
-    <!-- Operational Modules Section -->
     <section class="section" id="modules">
         <div class="container">
             <div class="section-header">
@@ -589,7 +620,7 @@
                 <p class="section-desc">Replace disconnected spreadsheets with an end-to-end management pipeline built specifically for fast, accurate logistics.</p>
             </div>
             <div class="modules-grid">
-                <!-- Konekado ang Module Card na ito sa WMS link -->
+                <!-- WMS Direct Redirection Link Card -->
                 <a href="https://havi-wms-ims.ai.studio/" target="_blank" class="module-card">
                     <div class="module-icon"><i class="fa-solid fa-warehouse"></i></div>
                     <h3>Warehouse Management (WMS)</h3>
@@ -632,7 +663,7 @@
                 <p class="section-desc">Discover how LogiFlow can automate your inventory counts, streamline sales, and optimize warehouse dispatch operations.</p>
             </div>
             <div class="form-box">
-                <form id="leadForm" onsubmit="event.preventDefault(); alert('Thank you! We will reach out to schedule your live demo.');">
+                <form id="leadForm">
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
                         <input type="text" id="fullName" class="form-control" placeholder="e.g. Juan Dela Cruz" required>
@@ -652,26 +683,102 @@
                     <div class="form-group">
                         <label for="interest">Primary System Requirement</label>
                         <select id="interest" class="form-control">
-                            <option value="wms">Warehouse Management System (WMS)</option>
-                            <option value="pos">Point of Sale (POS) System</option>
-                            <option value="erp">Complete ERP Suite</option>
-                            <option value="custom">Customized Solution</option>
+                            <option value="Warehouse Management System (WMS)">Warehouse Management System (WMS)</option>
+                            <option value="Point of Sale (POS) System">Point of Sale (POS) System</option>
+                            <option value="Complete ERP Suite">Complete ERP Suite</option>
+                            <option value="Customized Solution">Customized Solution</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
                         <i class="fa-solid fa-paper-plane"></i> Request Custom Demo
                     </button>
                 </form>
             </div>
+
+            <!-- Contact Information Section -->
+            <div class="contact-grid" id="contact">
+                <div class="contact-card">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <h4>Email Us</h4>
+                        <p><a href="mailto:andrescanial23@gmail.com">andrescanial23@gmail.com</a></p>
+                        <p><a href="mailto:andres.canialjr@havi.com">andres.canialjr@havi.com</a></p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <h4>Call / WhatsApp</h4>
+                        <p><a href="tel:+639975789750">+63 997 578 9750</a></p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Headquarters</h4>
+                        <p>Cabuyao, Laguna, Philippines</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fa-brands fa-facebook"></i>
+                    <div>
+                        <h4>Facebook Page</h4>
+                        <p><a href="https://www.facebook.com/profile.php?id=61596236976088" target="_blank">Connect on Facebook</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2026 LogiFlow Software Solutions. All rights reserved. Enterprise-grade WMS, POS, ERP & QMS Platforms.</p>
         </div>
     </footer>
 
+    <!-- JavaScript Integration Script -->
+    <script>
+        // Google Apps Script Web App Endpoint URL (Targeting 'record' tab on Google Sheet)
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz_47rJ6q310V_v67z0w8p9x4bY5zZ0A1B2C3D4E5F/exec';
+
+        const form = document.getElementById('leadForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+            const payload = {
+                fullName: document.getElementById('fullName').value,
+                companyName: document.getElementById('companyName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                interest: document.getElementById('interest').value
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                alert('Thank you! Your registration has been submitted. We will contact you shortly to schedule your demo.');
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Request Custom Demo';
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert('Something went wrong. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Request Custom Demo';
+            });
+        });
+    </script>
 </body>
 </html>
